@@ -9,9 +9,9 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --beige:       #e8dcc8;
-    --beige-dark:  #c9b99a;
-    --cream:       #f2ead8;
+    --beige:       #ffffff;
+    --beige-dark:  #4f545c;
+    --cream:       #ffffff;
     --discord:     #36393f;
     --discord-mid: #2f3136;
     --discord-dark:#202225;
@@ -19,7 +19,7 @@
     --purple-glow: rgba(88,101,242,0.35);
     --gold:        #DEAD6A;
     --gold-glow:   rgba(222,173,106,0.4);
-    --text-light:  #f2ead8;
+    --text-light:  #ffffff;
     --text-muted:  #b9bbbe;
   }
 
@@ -33,7 +33,7 @@
   /* ── GRAIN OVERLAY ── */
   body::before {
     content: '';
-    position: fixed; inset: 0; z-index: 100;
+    position: fixed; inset: 0; z-index: 10;
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     opacity: 0.4;
@@ -71,38 +71,23 @@
     justify-content: center;
     min-height: 100vh;
     background:
-      radial-gradient(ellipse at 30% 20%, rgba(222,173,106,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 70% 80%, rgba(88,101,242,0.15) 0%, transparent 55%),
-      linear-gradient(160deg, #1a1510 0%, #2a2118 40%, #1e1e2e 100%);
+      radial-gradient(ellipse at 30% 20%, rgba(88,101,242,0.2) 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 80%, rgba(222,173,106,0.12) 0%, transparent 55%),
+      linear-gradient(160deg, #1a1c1f 0%, #23262b 40%, #1a1e2a 100%);
     text-align: center;
     padding: 40px 24px;
     position: relative;
     overflow: hidden;
   }
 
-  /* Decorative torn paper top */
-  .cover::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 60px;
-    background: var(--beige);
-    clip-path: polygon(0 0, 100% 0, 100% 30%, 95% 60%, 88% 40%, 80% 65%, 72% 35%, 65% 55%, 57% 25%, 50% 50%, 43% 30%, 36% 60%, 28% 40%, 20% 65%, 12% 35%, 5% 55%, 0 40%);
-    opacity: 0.6;
-  }
-  .cover::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 50px;
-    background: var(--beige-dark);
-    clip-path: polygon(0 100%, 100% 100%, 100% 60%, 95% 40%, 88% 65%, 80% 35%, 72% 60%, 65% 45%, 57% 70%, 50% 50%, 43% 70%, 36% 40%, 28% 60%, 20% 35%, 12% 60%, 5% 45%, 0 65%);
-    opacity: 0.5;
-  }
+  .cover::before { display: none; }
+  .cover::after { display: none; }
 
   .cover-inner { position: relative; z-index: 2; }
 
   .cover-badge {
     display: inline-block;
-    border: 1px solid var(--gold);
+    border: 1px solid var(--purple);
     color: var(--gold);
     font-family: 'Cinzel', serif;
     font-size: 11px;
@@ -111,32 +96,31 @@
     padding: 6px 20px;
     border-radius: 30px;
     margin-bottom: 24px;
-    box-shadow: 0 0 20px var(--gold-glow);
+    box-shadow: 0 0 20px var(--purple-glow);
+    background: rgba(88,101,242,0.08);
   }
 
   .cover-title {
     font-family: 'Cinzel', serif;
     font-size: clamp(28px, 6vw, 52px);
     font-weight: 900;
-    color: var(--text-light);
+    color: var(--gold);
     line-height: 1.1;
     letter-spacing: -1px;
     text-shadow: 0 0 40px var(--gold-glow), 0 4px 20px rgba(0,0,0,0.8);
     margin-bottom: 8px;
   }
   .cover-title span {
-    background: linear-gradient(135deg, #DEAD6A, #f0c97a, #c49a45);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--gold);
+    -webkit-text-fill-color: var(--gold);
   }
 
   .cover-subtitle {
-    font-size: 20px;
+    font-size: 22px;
     font-style: italic;
-    color: var(--beige);
+    color: #ffffff;
     margin-bottom: 40px;
-    opacity: 0.85;
+    opacity: 1;
   }
 
   /* Preview grid on cover */
@@ -151,11 +135,12 @@
     aspect-ratio: 4/3;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid rgba(222,173,106,0.3);
+    border: 1px solid rgba(88,101,242,0.4);
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     transition: transform 0.3s ease;
+    cursor: pointer;
   }
-  .cover-grid-item:hover { transform: scale(1.04); }
+  .cover-grid-item:hover { transform: scale(1.04); border-color: var(--purple); box-shadow: 0 8px 28px rgba(88,101,242,0.3); }
   .cover-grid-item img {
     width: 100%; height: 100%;
     object-fit: cover; display: block;
@@ -165,9 +150,9 @@
 
   .cover-divider {
     width: 200px; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    background: linear-gradient(90deg, transparent, var(--purple), var(--gold), var(--purple), transparent);
     margin: 0 auto 20px;
-    box-shadow: 0 0 10px var(--gold-glow);
+    box-shadow: 0 0 10px var(--purple-glow);
   }
 
   .cover-count {
@@ -182,9 +167,9 @@
   ══════════════════════════════════════ */
   .gallery-slide {
     background:
-      radial-gradient(ellipse at 80% 10%, rgba(222,173,106,0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 20% 90%, rgba(88,101,242,0.08) 0%, transparent 50%),
-      linear-gradient(180deg, #1a1510 0%, #1e1c18 50%, #1a1e2a 100%);
+      radial-gradient(ellipse at 80% 10%, rgba(88,101,242,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 90%, rgba(222,173,106,0.05) 0%, transparent 50%),
+      linear-gradient(180deg, #202225 0%, #23262b 50%, #202225 100%);
     padding: 30px 20px 80px;
     min-height: 100vh;
   }
@@ -195,7 +180,7 @@
     gap: 12px;
     margin-bottom: 24px;
     padding-bottom: 14px;
-    border-bottom: 1px solid rgba(222,173,106,0.2);
+    border-bottom: 1px solid rgba(88,101,242,0.3);
   }
   .gallery-page-label {
     font-family: 'Cinzel', serif;
@@ -206,7 +191,7 @@
   }
   .gallery-page-line {
     flex: 1; height: 1px;
-    background: linear-gradient(90deg, rgba(222,173,106,0.3), transparent);
+    background: linear-gradient(90deg, rgba(88,101,242,0.4), transparent);
   }
   .gallery-page-num {
     font-family: 'Cinzel', serif;
@@ -234,8 +219,8 @@
   }
   .photo-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(222,173,106,0.3);
-    border-color: rgba(222,173,106,0.3);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(88,101,242,0.4);
+    border-color: rgba(88,101,242,0.4);
   }
   .photo-card.tall { grid-row: span 2; }
   .photo-card.wide { grid-column: span 2; }
@@ -282,36 +267,24 @@
 
   /* ── LAST SLIDE — CTA ── */
   .cta-slide {
+    background: linear-gradient(160deg, #1a1c1f 0%, #1a1e2a 100%);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
     text-align: center;
     padding: 40px 24px;
-    background:
-      radial-gradient(ellipse at center, rgba(88,101,242,0.15) 0%, transparent 65%),
-      linear-gradient(160deg, #1a1510 0%, #1e1e2e 100%);
-    position: relative;
-    overflow: hidden;
   }
-  .cta-slide::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 50px;
-    background: var(--beige);
-    clip-path: polygon(0 0, 100% 0, 100% 30%, 95% 60%, 88% 40%, 80% 65%, 72% 35%, 65% 55%, 57% 25%, 50% 50%, 43% 30%, 36% 60%, 28% 40%, 20% 65%, 12% 35%, 5% 55%, 0 40%);
-    opacity: 0.5;
-  }
-
   .cta-icon { font-size: 48px; margin-bottom: 20px; }
   .cta-title {
     font-family: 'Cinzel', serif;
     font-size: clamp(22px, 5vw, 36px);
     font-weight: 900;
-    color: var(--text-light);
+    color: var(--gold);
     margin-bottom: 16px;
-    text-shadow: 0 0 30px var(--purple-glow);
+    text-shadow: 0 0 30px var(--gold-glow);
+    line-height: 1.3;
   }
   .cta-text {
     font-size: 17px;
@@ -333,6 +306,13 @@
     letter-spacing: 2px;
     box-shadow: 0 0 30px var(--purple-glow);
   }
+  .sparkle {
+    position: absolute;
+    color: var(--gold);
+    font-size: 14px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   /* ── NAVIGATION ── */
   .nav {
@@ -341,7 +321,7 @@
     height: 60px;
     background: rgba(32,34,37,0.95);
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(232,220,200,0.1);
+    border-top: 1px solid rgba(88,101,242,0.2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -352,17 +332,17 @@
   .nav-btn {
     width: 40px; height: 40px;
     border-radius: 50%;
-    border: 1px solid rgba(222,173,106,0.4);
-    background: rgba(222,173,106,0.08);
-    color: var(--gold);
+    border: 1px solid rgba(88,101,242,0.4);
+    background: rgba(88,101,242,0.08);
+    color: var(--text-light);
     font-size: 18px;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     transition: all 0.2s ease;
   }
   .nav-btn:hover {
-    background: rgba(222,173,106,0.2);
-    box-shadow: 0 0 16px var(--gold-glow);
+    background: rgba(88,101,242,0.2);
+    box-shadow: 0 0 16px var(--purple-glow);
   }
   .nav-btn:disabled { opacity: 0.3; cursor: default; }
 
@@ -372,14 +352,14 @@
   .nav-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
-    background: rgba(222,173,106,0.25);
+    background: rgba(88,101,242,0.25);
     cursor: pointer;
     transition: all 0.3s ease;
     border: none;
   }
   .nav-dot.active {
-    background: var(--gold);
-    box-shadow: 0 0 8px var(--gold-glow);
+    background: var(--purple);
+    box-shadow: 0 0 8px var(--purple-glow);
     width: 20px;
     border-radius: 4px;
   }
@@ -399,19 +379,21 @@
     max-width: 100%; max-height: 85vh;
     border-radius: 12px;
     box-shadow: 0 0 60px rgba(0,0,0,0.8);
-    border: 1px solid rgba(222,173,106,0.3);
+    border: 1px solid rgba(88,101,242,0.4);
   }
   .lightbox-close {
     position: absolute; top: 20px; right: 20px;
-    background: rgba(222,173,106,0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold);
+    background: rgba(88,101,242,0.15);
+    border: 1px solid var(--purple);
+    color: var(--text-light);
     width: 40px; height: 40px;
     border-radius: 50%;
     font-size: 20px;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s ease;
   }
+  .lightbox-close:hover { background: var(--purple); }
 
   /* Sparkles */
   .sparkle {
@@ -432,16 +414,16 @@
     <div class="cover-inner">
       <div class="cover-badge">✦ Black Desert Console ✦</div>
       <h1 class="cover-title"><span>Community</span><br>Event Gallery</h1>
-      <p class="cover-subtitle">Captured by our Adventurers</p>
+      <p class="cover-subtitle">Adventures we experienced together</p>
 
       <div class="cover-grid">
-        <div class="cover-grid-item"><img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/66d8de5c53e20260602234116189.png" alt=""/></div>
-        <div class="cover-grid-item"><img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/319f3d2d88620260602234116426.png" alt=""/></div>
-        <div class="cover-grid-item"><img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/dacec3beed920260602234116357.png" alt=""/></div>
+        <div class="cover-grid-item" onclick="openLightbox(this)"><img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/f375ab3d56c20260602234116415.png" alt=""/></div>
+        <div class="cover-grid-item" onclick="openLightbox(this)"><img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/dacec3beed920260602234116357.png" alt=""/></div>
+        <div class="cover-grid-item" onclick="openLightbox(this)"><img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/319f3d2d88620260602234116426.png" alt=""/></div>
       </div>
 
       <div class="cover-divider"></div>
-      <p class="cover-count">15 Community Moments</p>
+      <p class="cover-count">16 Community Moments</p>
     </div>
   </div>
 
@@ -457,23 +439,23 @@
       <div class="photo-card tall" onclick="openLightbox(this)">
         <div class="tape"></div>
         <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/f375ab3d56c20260602234116415.png" alt="Community moment"/>
-        <div class="photo-caption"><p>Adventurers gathering in the world of Black Desert</p></div>
+        <div class="photo-caption"><p>Lanterns light the sky as Adventurers gather</p></div>
       </div>
 
       <div class="photo-card" onclick="openLightbox(this)">
-        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/9e08a9d93a620260602234116065.png" alt="Community moment"/>
-        <div class="photo-caption"><p>A moment captured in the field</p></div>
+        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/dacec3beed920260602234116357.png" alt="Community moment"/>
+        <div class="photo-caption"><p>A breathtaking lantern gathering</p></div>
       </div>
 
       <div class="photo-card" onclick="openLightbox(this)">
         <div class="tape tape-right"></div>
-        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/135a8dd383620260602234116143.png" alt="Community moment"/>
-        <div class="photo-caption"><p>Sharing adventures together</p></div>
+        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/319f3d2d88620260602234116426.png" alt="Community moment"/>
+        <div class="photo-caption"><p>Adventurers united under a glowing sky</p></div>
       </div>
 
       <div class="photo-card wide" onclick="openLightbox(this)">
-        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/e1b41bb915820260602234116446.png" alt="Community moment"/>
-        <div class="photo-caption"><p>Exploring the vast world of Black Desert</p></div>
+        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/66d8de5c53e20260602234116189.png" alt="Community moment"/>
+        <div class="photo-caption"><p>A moment captured in Black Desert</p></div>
       </div>
 
     </div>
@@ -547,7 +529,7 @@
     </div>
   </div>
 
-  <!-- ══ SLIDE 5: GALLERY PAGE 4 (remaining photos) ══ -->
+  <!-- ══ SLIDE 5: GALLERY PAGE 4 ══ -->
   <div class="slide gallery-slide" id="slide-4">
     <div class="gallery-header">
       <span class="gallery-page-label">✦ Community Gallery</span>
@@ -555,32 +537,32 @@
       <span class="gallery-page-num">04 / 04</span>
     </div>
     <div class="photo-grid">
-      <div class="photo-card wide" onclick="openLightbox(this)">
-        <div class="tape"></div>
-        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/66d8de5c53e20260602234116189.png" alt="Community moment"/>
-        <div class="photo-caption"><p>Opening moments of a grand event</p></div>
-      </div>
       <div class="photo-card tall" onclick="openLightbox(this)">
-        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/319f3d2d88620260602234116426.png" alt="Community moment"/>
-        <div class="photo-caption"><p>An Adventurer's journey</p></div>
+        <div class="tape"></div>
+        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/03/39e1250985520260603004129458.png" alt="Community moment"/>
+        <div class="photo-caption"><p>Every corner of the world holds a story</p></div>
+      </div>
+      <div class="photo-card" onclick="openLightbox(this)">
+        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/03/7362058195920260603004129491.png" alt="Community moment"/>
+        <div class="photo-caption"><p>An Adventurer's journey continues</p></div>
       </div>
       <div class="photo-card" onclick="openLightbox(this)">
         <div class="tape tape-right"></div>
-        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/dacec3beed920260602234116357.png" alt="Community moment"/>
-        <div class="photo-caption"><p>Captured in the wild</p></div>
+        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/03/6201470a41620260603004129450.png" alt="Community moment"/>
+        <div class="photo-caption"><p>Moments worth remembering</p></div>
+      </div>
+      <div class="photo-card wide" onclick="openLightbox(this)">
+        <img src="https://s1.pearlcdn.com/bdo/brand/board/2026/06/02/9e08a9d93a620260602234116065.png" alt="Community moment"/>
+        <div class="photo-caption"><p>The adventure never truly ends</p></div>
       </div>
     </div>
   </div>
 
-  <!-- ══ SLIDE 6: CTA ══ -->
+  <!-- ══ SLIDE 6: END CARD ══ -->
   <div class="slide cta-slide" id="slide-5">
-    <span class="sparkle" style="top:15%; left:12%;">✦</span>
-    <span class="sparkle" style="top:20%; right:10%; font-size:20px;">✦</span>
-    <span class="sparkle" style="bottom:25%; left:8%; font-size:10px;">✦</span>
-    <span class="sparkle" style="bottom:20%; right:14%;">✦</span>
     <div class="cta-icon">📸</div>
-    <h2 class="cta-title">Share Your Adventure</h2>
-    <p class="cta-text">Have an amazing screenshot or community moment to share? Post it in our community channels and you might be featured in the next gallery!</p>
+    <h2 class="cta-title">Every Adventure<br>Leaves a Mark</h2>
+    <p class="cta-text">These are just a few of the moments that make this community special. Have a screenshot to share? Drop it in our community channels for everyone to see and enjoy together.</p>
     <div class="cta-badge">✦ #community-events ✦</div>
   </div>
 
